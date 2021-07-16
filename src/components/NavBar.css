@@ -1,0 +1,149 @@
+.amazon-logo{
+    width: 100px;
+    height: 40px;
+    margin-top: 2px;
+    margin-left: 6px;
+}
+
+#navbar{
+  background-color:#131921;
+  padding: 0.7rem;
+ 
+}
+
+#secondnavbar{
+  background-color:#232F3E;
+  padding: 0;
+}
+
+.nav-link{
+  color:#FFFFFF ;
+  display:inline!important;
+}
+
+.navLink{
+  color: #FFFFFF!important;
+  display:inline!important;
+}
+
+.navLink:hover{
+  color: #e9caca!important;
+  display:inline!important;
+}
+
+.navbar-toggler{
+  background-color: rgb(78, 75, 75)!important;
+}
+
+#nav-one{
+  background-image: url("https://images-eu.ssl-images-amazon.com/images/G/03/gno/sprites/nav-sprite-global-2x-hm-dsk-reorg._CB405937709_.png");
+  background-size: 350px;
+  background-repeat: repeat-x;
+  background-position: -71px -378px;
+  width: 15px;
+  height: 20px;
+  margin-top: 20px;
+  left: 2px;
+  top: 10px;
+  display: flex;
+  position: static;
+  float: none;
+}
+
+#nav-two{
+  line-height: 1.1rem;
+  color: #FFFFFF!important;
+}
+
+#search-drop{
+  color: #131921!important;
+}
+
+#basic-addon3{
+  padding: 0px!important;
+  font-size: small;
+}
+
+#basic-url{
+  height: auto;
+}
+
+.search-field{
+  width: 45%;
+}
+
+.search-button{
+  background-color: rgb(238, 181, 76);
+  border-color: rgb(238, 181, 76);
+}
+
+.search-button:hover{
+  background-color: orange;
+  border-color: orange;
+}
+
+.search-svg{
+  color: #131921;
+  height: 26px;
+  width: 26px;
+}
+
+.flag{
+  background-image: url("https://m.media-amazon.com/images/S/sash/rzrQQdi0aRm6Dap.png");
+  background-position: 0 -202px;
+  margin: 10px 2px 1px 25px;
+  display: flex;
+  position: static;
+  float: none;
+  align-items: center;
+  padding: 0;
+  width: 24px;
+  height: 18px;
+}
+
+.dropdown-toggle:empty::after{
+  margin-left: 12px;
+  margin-top: 19px;
+}
+
+.hm-icon{
+ height: 14px;
+ width: 17px;
+ background-image: url("https://images-eu.ssl-images-amazon.com/images/G/03/gno/sprites/nav-sprite-global-2x-hm-dsk-reorg._CB405937709_.png");
+ background-size: 350px;
+ margin-top: 12px;
+ background-repeat: repeat-x;
+ background-position: -172px -255px;
+}
+
+.flag-dropdown{
+  left:700px!important;
+}
+
+.shop-cart{
+  background-image: url("https://images-eu.ssl-images-amazon.com/images/G/03/gno/sprites/nav-sprite-global-2x-hm-dsk-reorg._CB405937709_.png");
+  background-size: 350px;
+  width: 41px;
+  height: 28px;
+  background-position: -218px -337px;
+  padding: 0;
+  margin: 0;
+  align-items: center;
+  display: flex;
+  position: static;
+  float: none;
+  overflow: hidden;
+  top: 11px;
+  left: 10px;
+}
+
+.cart-count{
+  color:orange;
+  position: absolute;
+  right: 12px;
+  bottom: 11px;
+}
+
+.total-cart{
+  position: relative;
+}
