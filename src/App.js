@@ -9,15 +9,24 @@ import Details from './components/Details';
 import AddProduct from './components/AddProduct';
 import User from './components/User';
 import Cart from './components/Cart';
+import { useState } from 'react';
 
 function App() {
+
+  const [filter, setFilter ] = useState('')
+
+  const updated = (val) => {
+    setFilter(val)
+    console.log(val);
+  }
+
   return (
     <BrowserRouter>
-      <NavBar/>
+      <NavBar search={updated}/>
 
       <SecondNavBar/>
     
-      <Route exact path="/" render={(routerProps)=> <Home {...routerProps} />} />
+      <Route exact path="/" render={(routerProps)=> <Home {...routerProps} search={filter} />} />
 
       <Route exact path="/details/:id" render={(routerProps)=> <Details {...routerProps} />}/>
 

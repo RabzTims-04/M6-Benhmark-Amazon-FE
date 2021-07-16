@@ -1,0 +1,9 @@
+.trash-can{
+    width: 20px;
+    height: 20px;
+}
+
+.trash-can:hover{
+    z-index: 1;
+    transform: translateY(2px);
+}

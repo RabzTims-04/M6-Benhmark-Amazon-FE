@@ -1,9 +1,19 @@
 import React, { Component } from 'react';
-import {Navbar, Nav, NavDropdown, Button, Form, FormControl, InputGroup} from 'react-bootstrap'
+import {Navbar, Nav, NavDropdown, Button, FormControl, InputGroup} from 'react-bootstrap'
 import { Link, withRouter } from 'react-router-dom'
 import "./NavBar.css"
 
 class NavBar extends Component {
+
+    state={
+        search:''
+    }
+
+    componentDidUpdate = () =>{   
+        this.props.search(this.state.search)
+        console.log(this.state.search)        
+}
+
     render() {
         return (
                 <Navbar className="pr-0 mr-0" collapseOnSelect expand="lg" id="navbar">
@@ -41,7 +51,16 @@ class NavBar extends Component {
                                 </NavDropdown>                               
                             </InputGroup.Text>
                             </InputGroup.Prepend>
-                            <FormControl id="basic-url" placeholder="search" aria-describedby="basic-addon3" />
+                            <FormControl
+                            value={this.state.search}
+                            onChange={(e) => {
+                                this.setState({
+                                search:e.target.value
+                            })
+                        }} 
+                            id="basic-url" 
+                            placeholder="search" 
+                            aria-describedby="basic-addon3" />
                             <InputGroup.Append>
                                 <Button className="search-button"><svg className="search-svg" focusable="false" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M15.5 14h-.79l-.28-.27A6.471 6.471 0 0 0 16 9.5 6.5 6.5 0 1 0 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"></path></svg></Button>
                             </InputGroup.Append>

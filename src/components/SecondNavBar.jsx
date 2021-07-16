@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {Navbar, Nav, NavDropdown} from 'react-bootstrap'
+import {Navbar, Nav } from 'react-bootstrap'
 import { Link, withRouter } from 'react-router-dom'
 import "./NavBar.css"
 
@@ -31,15 +31,6 @@ class SecondNavBar extends Component {
                             <Link className="navLink nav-link"  to="/">
                                 Prime
                             </Link>
-                            {/* <Link id="nav-drop" className="navLink nav-link"  to="/">
-                            <NavDropdown className="navLink" title="Prime" id="collasible-nav-dropdown">
-                                <NavDropdown.Item >Action</NavDropdown.Item>
-                                <NavDropdown.Item >Another action</NavDropdown.Item>
-                                <NavDropdown.Item >Something</NavDropdown.Item>
-                                <NavDropdown.Divider />
-                                <NavDropdown.Item >Separated link</NavDropdown.Item>
-                            </NavDropdown>
-                            </Link> */}
                             <Link className="navLink nav-link"  to="/">
                                 Prime Video
                             </Link>

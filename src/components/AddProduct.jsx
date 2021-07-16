@@ -1,58 +1,72 @@
 import React, { Component, createRef } from 'react';
 import { Container, Form, Button } from 'react-bootstrap'
 
+const {REACT_APP_BACKEND_URL} = process.env
 class AddProduct extends Component {
 
     ref = createRef()
 
     state={
-        postProduct:{
+        categories:[],
+        categoryId:'',
+        product:{
             "name": "",
             "description": "",
             "brand": "",
             "imageUrl": "http://avatar.com",
-            "category": "",
-            "price":0,
+            "categoryId": "",
+            "price":'',
         }
     }
 
-    /* handleChange = (e) =>{
-        const id = e.target.id
-        this.setState({
-            ...this.state,
-            postProduct:{
-                ...this.state.postProduct,
-                [id]: e.target.value
+    url = `${REACT_APP_BACKEND_URL}/products`
+    categoryUrl = `${REACT_APP_BACKEND_URL}/categories`
+
+    componentDidMount = () => {
+        this.fetchCategories()
+    }
+
+    fetchCategories = async() => {
+        try {
+            const response = await fetch (this.categoryUrl)
+            const data = await response.json()
+            if(response.ok){
+                this.setState({
+                    ...this.state,
+                    categories:data
+                })
             }
-        })
-    } */
+        } catch (error) {
+            console.log(error);
+        }
+    }
 
     postProduct = async (e)=>{
         e.preventDefault()
         let formData = new FormData()
-        formData.append('image', this.state.postProduct.image)
+        formData.append('cover', this.state.product.image)
        try {
-           const url = `http://localhost:3002/products`
-           const response = await fetch(url,{
+        const categoryId = this.state.categories.find(category => category.name.includes(this.state.product.categoryId.split(' ')[0])).id
+           const response = await fetch(this.url,{
                method:'POST',
                body:JSON.stringify({
-                name:this.state.postProduct.name,
-                description: this.state.postProduct.description,
-                brand: this.state.postProduct.brand,
-                imageUrl: this.state.postProduct.imageUrl,
-                category:this.state.postProduct.category,
-                price: this.state.postProduct.price
+                name:this.state.product.name,
+                description: this.state.product.description,
+                brand: this.state.product.brand,
+                imageUrl: this.state.product.imageUrl,
+                categoryId:categoryId,
+                price: this.state.product.price
                }),
                headers:{
                    'content-type':'application/json'
                }
            })
            const data = await response.json()
-           const productId = await data._id
+           const productId = await data.id
            if(response.ok){
-               if(this.state.postProduct.image){
+               if(this.state.product.image){
                    try {
-                       const postImg = await fetch(`http://localhost:3002/products/${productId}/upload`,{
+                       const postImg = await fetch(`${this.url}/${productId}/upload`,{
                            method:'POST',
                            body: formData
                        })
@@ -68,16 +82,15 @@ class AddProduct extends Component {
                }
                alert('details posted successfully')
                this.setState({
-                postProduct:{
+                product:{
                     "name": "",
                     "description": "",
                     "brand": "",
-                    "imageUrl": "http://avatar.com",
-                    "category": "",
+                    "imageUrl": "",
+                    "categoryId": "",
                     "price":""
                 }
                })
-               window.location.replace('http://localhost:3002')
            }
        } catch (error) {
            console.log(error);
@@ -96,10 +109,10 @@ class AddProduct extends Component {
                         <Form.Control 
                         id="name"
                         type="text"
-                        value={this.state.postProduct.name}
+                        value={this.state.product.name}
                         onChange={(e)=> this.setState({
-                            postProduct:{
-                                ...this.state.postProduct,
+                            product:{
+                                ...this.state.product,
                                 name:e.target.value
                             }
                         })} 
@@ -115,8 +128,8 @@ class AddProduct extends Component {
                         id="image"
                         ref={this.ref}
                         onChange={(e) => {this.setState({
-                                    postProduct:{
-                                    ...this.state.postProduct, 
+                            product:{
+                                    ...this.state.product, 
                                     image: e.target.files[0]}
                                 })
                                 console.log(e.target.files[0])}}
@@ -134,10 +147,10 @@ class AddProduct extends Component {
                         <Form.Label>Brand</Form.Label>
                         <Form.Control 
                         id="brand"
-                         value={this.state.postProduct.brand}
+                         value={this.state.product.brand}
                          onChange={(e)=> this.setState({
-                            postProduct:{
-                                ...this.state.postProduct,
+                            product:{
+                                ...this.state.product,
                                 brand:e.target.value
                             }
                         })}
@@ -149,11 +162,11 @@ class AddProduct extends Component {
                         <Form.Label>Price</Form.Label>
                         <Form.Control 
                          id="price"
-                         value={this.state.postProduct.price}
+                         value={this.state.product.price}
                         type="text" 
                         onChange={(e)=> this.setState({
-                            postProduct:{
-                                ...this.state.postProduct,
+                            product:{
+                                ...this.state.product,
                                 price:e.target.value
                             }
                         })}
@@ -161,7 +174,33 @@ class AddProduct extends Component {
                         
                     </Form.Group>
 
-                    <Form.Group>
+                    <Form.Group className="mt-3">
+                        <Form.Label>Categories</Form.Label>
+                        <Form.Control 
+                        id={this.state.categoryId}
+                        required
+                        value={this.state.product.categoryId}
+                        onChange={(e)=> {
+                        console.log(e.target.value);
+                        console.log(e.target[e.target.selectedIndex].id);
+                        this.setState({
+                            ...this.state,
+                        product:{
+                            ...this.state.product,
+                            categoryId: e.target.value                  
+                        }
+                        })
+                
+                    }}
+                        size="lg" 
+                        as="select">
+                        {this.state.categories && this.state.categories.map( category => 
+                        <option key={category.id} id={category.id} >{category.name}</option>
+                        )}
+                        </Form.Control>
+                    </Form.Group>
+
+                   {/*  <Form.Group>
                         <Form.Label>Category</Form.Label>
                         <Form.Control
                          id="category"
@@ -174,16 +213,16 @@ class AddProduct extends Component {
                         })} 
                         type="text" 
                         placeholder="Category" />
-                    </Form.Group>
+                    </Form.Group> */}
 
                     <Form.Group>
                         <Form.Label>Description</Form.Label>
                         <Form.Control 
                         id="description"
-                        value={this.state.postProduct.description} 
+                        value={this.state.product.description} 
                         onChange={(e)=> this.setState({
-                            postProduct:{
-                                ...this.state.postProduct,
+                            product:{
+                                ...this.state.product,
                                 description:e.target.value
                             }
                         })}
@@ -202,14 +241,3 @@ class AddProduct extends Component {
 }
 
 export default AddProduct;
-
-/*  {
-        "_id": "5d318e1a8541744830bef139", //SERVER GENERATED
-        "name": "3310",  //REQUIRED
-        "description": "somthing longer", //REQUIRED
-        "brand": "nokia", //REQUIRED 	  "imageUrl":"https://drop.ndtv.com/TECH/product_database/images/2152017124957PM_635_nokia_3310.jpeg?downsize=*:420&output-quality=80",
-        "price": 100, //REQUIRED
-        "category": "smartphones" //REQUIRED
-        "createdAt": "2019-07-19T09:32:10.535Z", //SERVER GENERATED
-        "updatedAt": "2019-07-19T09:32:10.535Z", //SERVER GENERATED
-    } */
