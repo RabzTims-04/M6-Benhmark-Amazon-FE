@@ -50,6 +50,11 @@ class SecondNavBar extends Component {
                                 Add Products
                             </Link>
                         </Nav>
+                        <Nav className="ml-auto">
+                            <Link className="navLink nav-link" to="/">
+                            <img alt="AF" src="https://images-eu.ssl-images-amazon.com/images/G/03/MOZART/AMAZON-FASHION/2018/09_SEPT/SMWS_400X39-SEPTMERCH18_CB470776138_._CB483511684_.png" className=""/>
+                            </Link>
+                        </Nav>
                     </Navbar.Collapse>
                 </Navbar>
         );
