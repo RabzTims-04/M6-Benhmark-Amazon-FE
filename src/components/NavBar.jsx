@@ -3,15 +3,53 @@ import {Navbar, Nav, NavDropdown, Button, FormControl, InputGroup} from 'react-b
 import { Link, withRouter } from 'react-router-dom'
 import "./NavBar.css"
 
+
+const {REACT_APP_BACKEND_URL} = process.env
 class NavBar extends Component {
 
+url = `${REACT_APP_BACKEND_URL}/cart`
+
     state={
-        search:''
+        search:'',
+        total:'',
+        basket:false,
     }
 
-    componentDidUpdate = () =>{   
+    componentDidUpdate = (prevProps, prevState) =>{   
         this.props.search(this.state.search)
-        console.log(this.state.search)        
+        prevProps.basket && prevProps.basket.updatedAt !== this.props.basket.updatedAt && this.setState({
+            ...this.state,
+            basket:!this.state.basket
+        })
+
+        console.log(this.state.search) 
+        if((prevState.total !== this.state.total) || (this.state.basket)){
+            this.setState({
+                ...this.state,
+                basket:!this.state.basket
+            })
+            this.fetchCart()
+
+        }
+}
+
+componentDidMount = () => {
+    this.fetchCart()
+}
+
+fetchCart = async () => {
+    try {
+        const response = await fetch(this.url)
+        const data = await response.json()
+        console.log(data);
+        if(response.ok){
+            this.setState({
+                total:data.total
+            })
+        }
+    } catch (error) {
+        console.log(error);
+    }
 }
 
     render() {
@@ -55,6 +93,7 @@ class NavBar extends Component {
                             value={this.state.search}
                             onChange={(e) => {
                                 this.setState({
+                                    ...this.state,
                                 search:e.target.value
                             })
                         }} 
@@ -100,7 +139,7 @@ class NavBar extends Component {
 
                         <Link className="total-cart"  to="/cart">
                                 <span className="shop-cart"></span>
-                                <b className="cart-count">0</b>
+                                <b className="cart-count">{this.state.total && this.state.total}</b>
                         </Link>
 
                         <Link className="nav-link ml-0 pl-2 mr-0 pr-0" id="nav-two" to="/cart">

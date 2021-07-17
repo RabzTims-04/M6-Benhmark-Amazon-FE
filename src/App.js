@@ -14,21 +14,26 @@ import { useState } from 'react';
 function App() {
 
   const [filter, setFilter ] = useState('')
+  const [ cart, setCart ] = useState()
 
   const updated = (val) => {
     setFilter(val)
     console.log(val);
   }
 
+  const added = (newVal) => {
+    setCart(newVal)
+  }
+
   return (
     <BrowserRouter>
-      <NavBar search={updated}/>
+      <NavBar search={updated} basket={cart}/>
 
       <SecondNavBar/>
     
       <Route exact path="/" render={(routerProps)=> <Home {...routerProps} search={filter} />} />
 
-      <Route exact path="/details/:id" render={(routerProps)=> <Details {...routerProps} />}/>
+      <Route exact path="/details/:id" render={(routerProps)=> <Details basket={added} {...routerProps} />}/>
 
       <Route exact path="/newProduct" render={(routerProps)=> <AddProduct {...routerProps} />}/>
 

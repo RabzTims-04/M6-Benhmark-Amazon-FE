@@ -1,0 +1,90 @@
+.cart-img{
+    width: 70px;
+    height: 60px;
+}
+
+.card-head{
+    font-size:xx-large;
+    font-weight:200 px;
+}
+
+.card-header a{
+    color: #007185;
+}
+
+.card-header a:hover{
+    color:#C7511F ;
+}
+
+.product-detail{
+    font-size: 0.85em;
+}
+
+.checkout-btn{
+    background-color:#FFD814;
+    border-radius: 8px;
+    color:black;
+    border-color: #FCD200;
+}
+
+.checkout-btn:hover{
+    background-color:#f8d10d;
+    border-radius: 8px;
+    color:black;
+    border-color: #FCD200;
+}
+
+.checkout-btn:active{
+    background-color:#FFD814;
+    border-radius: 8px;
+    color:black;
+    border-color: #FCD200;
+}
+
+.checkout-btn:focus{
+    background-color:#FFD814;
+    border-radius: 8px;
+    color:black;
+    border-color: #FCD200;
+}
+
+.checkout-right{
+    color: #067D62!important;
+    font-size: 14px;
+    font-weight: 20px;
+    line-height: 17px;
+}
+
+.checkout-right a{
+    color: #067D62!important;
+}
+
+.tick{
+    background-image: url("https://m.media-amazon.com/images/S/sash/qgGRgelkhXwysfn.png");
+    background-position: -457px -144px;
+    background-size: 512px 256px;
+    background-repeat: no-repeat;
+    height: 20px;
+    width: 20px;
+    position: absolute;
+    left: 18px;
+    top: 22px;
+    display: inline-block;
+    vertical-align: top;
+}
+
+.title-link{
+    color:black;
+}
+
+.title-link:hover{
+    color:black;
+}
+
+.border-line{
+    border-bottom: 1px solid rgb(218, 214, 214);
+}
+
+.delete-product a{
+    color:#007185;
+}

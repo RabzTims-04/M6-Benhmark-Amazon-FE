@@ -5,3 +5,36 @@
 #work{
     color: black!important;
 }
+
+#body{
+    background-color: #FFFFFF;
+}
+
+.basket-btn{
+    background-color:#FFD814;
+    border-radius: 8px;
+    color:black;
+    border-color: #FCD200;
+    width: 20%;
+}
+.basket-btn:hover{
+    background-color:#f8d10d;
+    border-radius: 8px;
+    color:black;
+    border-color: #FCD200;
+    width: 20%;
+}
+.basket-btn:active{
+    background-color:#FFD814;
+    border-radius: 8px;
+    color:black;
+    border-color: #FCD200;
+    width: 20%;
+}
+.basket-btn:focus{
+    background-color:#FFD814;
+    border-radius: 8px;
+    color:black;
+    border-color: #FCD200;
+    width: 20%;
+}

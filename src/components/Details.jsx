@@ -8,8 +8,12 @@ class Details extends Component {
 id = this.props.match.params.id
 url = `${REACT_APP_BACKEND_URL}/products/${this.id}`
 reviewUrl = `${REACT_APP_BACKEND_URL}/reviews`
+cartUrl = `${REACT_APP_BACKEND_URL}/cart`
 
 state={
+  cart:{
+    productId:this.id
+  },
   editMode:'',
   editReview:{
     comment:'',
@@ -139,17 +143,43 @@ deleteReview = async (e) => {
   }
 }
 
+postCart = async () => {
+  try {
+    const response = await fetch(this.cartUrl,{
+      method:"POST",
+      body:JSON.stringify(this.state.cart),
+      headers:{
+        'content-type':"application/json"
+      }
+    })
+    const data = await response.json()
+    console.log(data);
+    this.props.basket(data)
+    if(response.ok){
+      alert("added to basket successfully")
+    }
+    else{
+      console.log("error adding to cart");
+    }
+  } catch (error) {
+    console.log(error);
+  }
+}
+
     render() {
       const { name, brand, id, imageUrl, price, category, reviews, description } = this.state.product
         return (
-            <Container fluid >
+            <Container fluid id="body" >
                 <Row>
                     <Col xs={4}>
                         <img style={{height:'30rem'}} className="img-fluid p-5" src={imageUrl} alt="product"/>
                     </Col>
 
                     <Col className="p-5" xs={8}>
-                      <h1>{name}</h1>
+                        <div className="d-flex">
+                          <h1>{name}</h1>
+                          <Button onClick={(e) => this.postCart(e)} className="basket-btn p-1 mb-3 ml-auto">Add to Basket</Button>
+                        </div>
                          <ListGroup className="pt-4">
                             <ListGroup.Item><b>Brand: </b>{brand}</ListGroup.Item>
                             <ListGroup.Item><b>Price: </b>{price} €</ListGroup.Item>
