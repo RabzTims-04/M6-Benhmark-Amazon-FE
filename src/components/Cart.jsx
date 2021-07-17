@@ -88,7 +88,9 @@ checkOut = async () => {
                             <Card.Header style={{backgroundColor:"white"}} >
                                 <p className="card-head mb-0">Shopping Basket</p>
                                 <div className="d-flex">
+                                {this.state.cart.products && this.state.cart.products.length>0 &&
                                     <Link>Deselect all items</Link>
+                                }
                                     <span className="ml-auto">Price</span>
                                 </div>
                                 </Card.Header> 
@@ -132,19 +134,26 @@ checkOut = async () => {
                     <Col xs={12} md={3}>
                         <Card className="">
                             <Card.Body>
-                                <Card.Text className="checkout-right d-flex mb-4">
+                            {this.state.cart.products && this.state.cart.products.length>0 &&
+                                <Card.Text className="checkout-right d-flex mb-4">                               
                                 <div className="tick">
-                                </div>
+                                </div>                                 
                                 <div className="d-flex flex-column ml-4">
                                     <span>Your order qualifies for <b>FREE Delievry</b>.</span>
                                     <Link>Restrictions apply</Link>
-                                </div>
+                                </div>                                
                                 </Card.Text>
+                            }
                                 <Card.Title className="mb-1">SubTotal ({this.state.cart && this.state.cart.total} {this.state.cart && this.state.cart.total === 1?"item":"items"}): <b>€{this.state.cart && this.state.cart.totalPrice }</b></Card.Title>
+                                {this.state.cart.products && this.state.cart.products.length>0 &&
                                     <Form.Group controlId="formBasicCheckbox">
                                         <Form.Check type="checkbox" label="This order contains a gift" />
                                     </Form.Group>
-                                <Button onClick={(e) => this.checkOut()} className="checkout-btn w-100 p-1 mb-3">Proceed to Checkout</Button>
+                                }
+                                {this.state.cart.products && this.state.cart.products.length>0 
+                                ? <Button onClick={(e) => this.checkOut()} className="checkout-btn w-100 p-1 mb-3">Proceed to Checkout</Button>
+                                :  <Link to="/"><Button className="checkout-btn w-100 p-1 mb-3">Go for Shopping</Button></Link>
+                            }
                             </Card.Body>
                         </Card>
                     </Col>
