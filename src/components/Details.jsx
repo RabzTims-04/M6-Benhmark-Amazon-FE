@@ -322,7 +322,7 @@ postCart = async () => {
                                   <Card.Header>
                                     <div className="d-flex justify-content-between">
                                       <div>
-                                        <h5>Rating: {review.rate === 1 ? "⭐" 
+                                        <h5>Rating: {review.rate === 1 ? `⭐`
                                         : review.rate === 2 ? "⭐⭐"
                                         : review.rate === 3 ? "⭐⭐⭐"
                                         : review.rate === 4 ? "⭐⭐⭐⭐"

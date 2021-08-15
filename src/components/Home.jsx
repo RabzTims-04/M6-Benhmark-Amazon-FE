@@ -73,7 +73,7 @@ deleteProduct = async (e) => {
             <Container fluid className="mt-5">
                 <Row>
                     {this.state.products && this.state.products.map( product => 
-                        <Col className="" md={3} key={product.id}>
+                        <Col className="mt-3 mx-3" md={2} key={product.id}>
                         <Card style={{ width: '15rem', height:'20rem' }}>
                             <Card.Body>
                                 <h4><b>{product.name}</b></h4>
