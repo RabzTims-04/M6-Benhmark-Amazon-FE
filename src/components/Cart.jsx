@@ -70,7 +70,6 @@ checkOut = async () => {
         })
         if(response.ok){
             alert("Thankyou for shopping with us, Your shipment is on the way!!!")
-            window.location.replace("http://localhost:3000")
         }
     } catch (error) {
         console.log(error);
@@ -85,15 +84,24 @@ checkOut = async () => {
                     <Col xs={12} md={9}>
                       
                         <Card className="mb-5">
-                            <Card.Header style={{backgroundColor:"white"}} >
+                        {this.state.cart.products && this.state.cart.products.length>0
+                            ? <Card.Header style={{backgroundColor:"white"}} >
+                            
                                 <p className="card-head mb-0">Shopping Basket</p>
                                 <div className="d-flex">
-                                {this.state.cart.products && this.state.cart.products.length>0 &&
+                               
                                     <Link>Deselect all items</Link>
-                                }
+                              
                                     <span className="ml-auto">Price</span>
                                 </div>
-                                </Card.Header> 
+                                
+                                </Card.Header>
+                            : <Card.Header style={{backgroundColor:"white"}} >
+                                
+                                <p className="card-head mb-0 mt-3">Your Amazon Basket is empty.</p>
+                                <p className="mb-4">Your Shopping Basket lives to serve. Give it purpose--fill it with books, CDs, videos, DVDs, toys, electronics, and more. Continue shopping on the <Link to="/">Amazon.de</Link>, learn about today's deals, or visit your Wish List.</p>
+                                </Card.Header>
+                            }
                         {this.state.cart.products && this.state.cart.products.map( c =>                         
                             <Card.Body className="d-flex pr-0 border-line">
                                <Col xs={12} md={3}>
@@ -125,9 +133,11 @@ checkOut = async () => {
                             </Card.Body>
                             
                             )}
-                            <Card.Footer  style={{backgroundColor:"white"}} className="text-right">
-                            <h5 className="mb-4">SubTotal ({this.state.cart && this.state.cart.total} {this.state.cart && this.state.cart.total === 1?"item":"items"}): <b>€{this.state.cart && this.state.cart.totalPrice }</b></h5>
-                            </Card.Footer>
+                            {this.state.cart.products && this.state.cart.products.length>0 &&
+                                <Card.Footer  style={{backgroundColor:"white"}} className="text-right">
+                                <h5 className="mb-4">SubTotal ({this.state.cart && this.state.cart.total} {this.state.cart && this.state.cart.total === 1?"item":"items"}): <b>€{this.state.cart && this.state.cart.totalPrice }</b></h5>
+                                </Card.Footer>
+                            }
                         </Card>
                     </Col>
 
@@ -151,7 +161,7 @@ checkOut = async () => {
                                     </Form.Group>
                                 }
                                 {this.state.cart.products && this.state.cart.products.length>0 
-                                ? <Button onClick={(e) => this.checkOut()} className="checkout-btn w-100 p-1 mb-3">Proceed to Checkout</Button>
+                                ? <Button href="/" onClick={(e) => this.checkOut()} className="checkout-btn w-100 p-1 mb-3">Proceed to Checkout</Button>
                                 :  <Link to="/"><Button className="checkout-btn w-100 p-1 mb-3">Go for Shopping</Button></Link>
                             }
                             </Card.Body>
