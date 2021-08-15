@@ -167,7 +167,7 @@ postCart = async () => {
 }
 
     render() {
-      const { name, brand, id, imageUrl, price, category, reviews, description } = this.state.product
+      const { name, brand, imageUrl, price, category, reviews, description } = this.state.product
         return (
             <Container fluid id="body" >
                 <Row>
